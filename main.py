@@ -6,9 +6,7 @@ import sys
 sys.setrecursionlimit(200000)
 
 
-# =========================
 # ALGORITMOS DE ORDENAÇÃO
-# =========================
 
 def bubble_sort(arr):
     n = len(arr)
@@ -167,9 +165,7 @@ def quick_sort(arr):
     return arr
 
 
-# =========================
 # GERAÇÃO DOS CENÁRIOS
-# =========================
 
 def gerar_crescente(n):
     return list(range(n))
@@ -189,9 +185,7 @@ def gerar_aleatorio_com_repetidos(n):
     return [random.randint(0, n // 2) for _ in range(n)]
 
 
-# =========================
 # CÁLCULO ESTATÍSTICO
-# =========================
 
 def calcular_media_filtrada(tempos):
     media = statistics.mean(tempos)
@@ -218,9 +212,9 @@ def calcular_media_filtrada(tempos):
     }
 
 
-# =========================
+
 # MEDIÇÃO DE TEMPO
-# =========================
+
 
 def medir_tempo(algoritmo, array_original):
     copia = array_original.copy()
@@ -232,9 +226,7 @@ def medir_tempo(algoritmo, array_original):
     return fim - inicio
 
 
-# =========================
 # EXECUÇÃO DOS TESTES
-# =========================
 
 def executar_testes():
     tamanhos = [128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
@@ -284,9 +276,8 @@ def executar_testes():
     return resultados, tamanhos, algoritmos.keys()
 
 
-# =========================
 # GERAÇÃO DO ARQUIVO MARKDOWN
-# =========================
+
 
 def gerar_markdown(resultados, tamanhos, nomes_algoritmos):
     with open("resultados.md", "w", encoding="utf-8") as arquivo:
@@ -329,18 +320,13 @@ def gerar_markdown(resultados, tamanhos, nomes_algoritmos):
 
             arquivo.write("\n")
 
-        arquivo.write("## Observações\n\n")
-        arquivo.write("Os tempos podem variar conforme o hardware, sistema operacional e processos em execução no computador durante os testes.\n")
-        arquivo.write("Por isso, cada teste foi executado 10 vezes, aplicando o cálculo de média, desvio padrão e média filtrada.\n\n")
+        arquivo.write("## Metodologia de cálculo dos tempos\n\n")
+        arquivo.write("Para cada combinação de cenário, tamanho de array e algoritmo de ordenação, foram realizadas 10 execuções. Em cada execução, o tempo foi medido em nanossegundos usando `time.perf_counter_ns()`.\n")
+        
+        arquivo.write("Após as 10 execuções, foi calculada a média dos tempos. Em seguida, foi calculada a variância amostral e o desvio padrão. Com base no desvio padrão, foram desconsiderados os valores que ficaram fora do intervalo média ± desvio padrão..\n\n")
 
-        arquivo.write("De forma geral, espera-se que Bubble Sort, Insertion Sort e Selection Sort apresentem tempos maiores em arrays grandes, principalmente por terem comportamento quadrático. ")
-        arquivo.write("Já Heap Sort, Merge Sort e Quick Sort tendem a apresentar melhor desempenho em entradas maiores. ")
-        arquivo.write("O Shell Sort costuma apresentar desempenho intermediário, geralmente melhor que os métodos quadráticos simples.\n")
-
-
-# =========================
-# PROGRAMA PRINCIPAL
-# =========================
+        arquivo.write("Os valores apresentados nas tabelas correspondem à média final filtrada, calculada somente com os tempos que permaneceram dentro desse intervalo.")
+       
 
 if __name__ == "__main__":
     resultados, tamanhos, nomes_algoritmos = executar_testes()
