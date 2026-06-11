@@ -78,9 +78,10 @@
 | 32768 | 92074910762 | 42548871471 | 36977631383 | 237905117 | 638773971 | 143058729 | 78227240 |
 | 65536 | 372610600271 | 161135157214 | 147969183329 | 513836000 | 2014647583 | 355450886 | 176168083 |
 
-## Observações
+## Metodologia de cálculo dos tempos
 
-Os tempos podem variar conforme o hardware, sistema operacional e processos em execução no computador durante os testes.
-Por isso, cada teste foi executado 10 vezes, aplicando o cálculo de média, desvio padrão e média filtrada.
+Para cada combinação de cenário, tamanho de array e algoritmo de ordenação, foram realizadas 10 execuções. Em cada execução, o tempo foi medido em nanossegundos usando `time.perf_counter_ns()`.
 
-De forma geral, espera-se que Bubble Sort, Insertion Sort e Selection Sort apresentem tempos maiores em arrays grandes, principalmente por terem comportamento quadrático. Já Heap Sort, Merge Sort e Quick Sort tendem a apresentar melhor desempenho em entradas maiores. O Shell Sort costuma apresentar desempenho intermediário, geralmente melhor que os métodos quadráticos simples.
+Após as 10 execuções, foi calculada a média dos tempos. Em seguida, foi calculada a variância amostral e o desvio padrão. Com base no desvio padrão, foram desconsiderados os valores que ficaram fora do intervalo média ± desvio padrão.
+
+Os valores apresentados nas tabelas correspondem à média final filtrada, calculada somente com os tempos que permaneceram dentro desse intervalo.
